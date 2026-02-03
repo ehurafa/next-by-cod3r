@@ -1,9 +1,16 @@
 "use client"
 
-import { createContext, ReactNode } from "react"
+import { createContext, ReactNode, useState } from "react"
 
-const AppContext = createContext({
-    name: null
+type Theme = 'light' | 'dark'
+
+interface AppContextProps {
+    theme: Theme,
+    switchTheme?: () => void
+}
+
+const AppContext = createContext<AppContextProps>({
+    theme: 'light'
 })
 
 interface AppProviderProps {
@@ -11,9 +18,17 @@ interface AppProviderProps {
 }
 
 export function AppProvider({ children }: AppProviderProps) {
+
+    const [theme, setTheme] = useState<Theme>('light')
+
+    function switchTheme() {
+        setTheme(theme === 'light' ? 'dark' : 'light')
+    }
+
     return (
         <AppContext.Provider value={{
-            name: 'Teste Context API'
+            theme,
+            switchTheme
         }}>
             {children}
         </AppContext.Provider>
