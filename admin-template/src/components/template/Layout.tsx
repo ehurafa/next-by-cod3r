@@ -1,4 +1,6 @@
-import useAppData from "@/src/data/hook/useAppData"
+"use client"
+
+import useAppData from "../../data/hook/useAppData"
 import Content from "./Content"
 import SidebarMenu from "./SidebarMenu"
 import TopBar from "./TopBar"

@@ -6,11 +6,12 @@ type Theme = 'light' | 'dark'
 
 interface AppContextProps {
     theme: Theme,
-    switchTheme?: () => void
+    switchTheme: () => void
 }
 
 const AppContext = createContext<AppContextProps>({
-    theme: 'light'
+    theme: 'light',
+    switchTheme: () => {}
 })
 
 interface AppProviderProps {
