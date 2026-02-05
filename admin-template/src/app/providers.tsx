@@ -2,11 +2,15 @@
 
 import { ReactNode } from "react"
 import { AppProvider } from "../data/context/AppContext"
+import { AuthProvider } from "../data/context/AuthContext"
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <AppProvider>
-      {children}
-    </AppProvider>
+    <AuthProvider>
+        <AppProvider>
+            {children}
+        </AppProvider>
+    </AuthProvider>
+    
   )
 }

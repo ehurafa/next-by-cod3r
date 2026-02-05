@@ -1,8 +1,9 @@
 "use client"
 
-import AuthInput from "@/src/components/auth/AuthInput";
-import { WarningIcon } from "@/src/components/icons";
-import { useState } from "react";
+import AuthInput from "@/src/components/auth/AuthInput"
+import { WarningIcon } from "@/src/components/icons"
+import { useState } from "react"
+import useAuth from "@/src/data/hook/useAuth"
 
 type mode = "login" | "register"
 
@@ -11,6 +12,8 @@ export default function AuthenticationPage() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState<string|null>(null)
+
+    const { user, loginGoogle } = useAuth()
 
     function showError(message: string, timeInSeconds = 5) {
         setError(message)
@@ -88,7 +91,7 @@ export default function AuthenticationPage() {
                     className={`
                         w-full bg-red-500 hover:bg-red-400 text-white rounded-lg px-4 py-3 cursor-pointer
                         `}
-                    onClick={send}
+                    onClick={loginGoogle}
                 >
                     Entrar com o Google
                 </button>
