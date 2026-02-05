@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         source: '/notificacoes',
         destination: '/notifications',
       },
+      {
+        source: '/autenticacao',
+        destination: '/authentication',
+      },
     ];
   },
 };
