@@ -1,6 +1,7 @@
 "use client"
 
 import AuthInput from "@/src/components/auth/AuthInput";
+import { WarningIcon } from "@/src/components/icons";
 import { useState } from "react";
 
 type mode = "login" | "register"
@@ -9,12 +10,20 @@ export default function AuthenticationPage() {
     const [mode, setMode] = useState<mode>("login")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState<string|null>(null)
+
+    function showError(message: string, timeInSeconds = 5) {
+        setError(message)
+        setTimeout(() => setError(null), timeInSeconds * 1000)
+    }
 
     function send() {
         if (mode === "login") {
             console.log("Logando")
+            showError('Ops... Ocorreu um erro ao tentar logar. Verifique suas credenciais e tente novamente.')
         } else {
             console.log("Cadastrando")
+            showError('Ops... Ocorreu um erro ao tentar cadastrar. Verifique suas credenciais e tente novamente.')
         }
     }
 
@@ -35,7 +44,19 @@ export default function AuthenticationPage() {
                 <h1 className={
                     `text-3xl font-bold mb-5 
                     `
-                }>{mode === "login" ? "Entre com a sua conta" : "Cadastre-se na plataforma"}</h1>
+                    }>{mode === "login" ? "Entre com a sua conta" : "Cadastre-se na plataforma"}
+                </h1>
+
+                { error ? (
+                    <div className={`
+                        flex items-center bg-red-400 text-white py-3 px-5 my-2 border border-red-700 rounded-lg
+                    `}>
+                        { WarningIcon(6) }
+                        <span className="ml-3">{error}</span>
+
+                    </div>
+                ) : false }
+
                 <AuthInput
                     label="Email"
                     type="email"
