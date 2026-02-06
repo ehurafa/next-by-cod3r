@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         source: '/autenticacao',
         destination: '/authentication',
       },
+      {
+        source: '/perfil',
+        destination: '/profile',
+      },
     ];
   },
 };
