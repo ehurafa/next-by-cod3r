@@ -13,20 +13,19 @@ export default function AuthenticationPage() {
     const [password, setPassword] = useState("")
     const [error, setError] = useState<string|null>(null)
 
-    const { user, loginGoogle } = useAuth()
+    const { register, login, loginGoogle } = useAuth()
 
     function showError(message: string, timeInSeconds = 5) {
         setError(message)
         setTimeout(() => setError(null), timeInSeconds * 1000)
     }
 
-    function send() {
-        if (mode === "login") {
-            console.log("Logando")
-            showError('Ops... Ocorreu um erro ao tentar logar. Verifique suas credenciais e tente novamente.')
-        } else {
-            console.log("Cadastrando")
-            showError('Ops... Ocorreu um erro ao tentar cadastrar. Verifique suas credenciais e tente novamente.')
+    async function send() {
+        try {
+            login ? await login(email, password) : await register(email, password)
+
+        } catch(e) {
+            showError(e?.message ?? 'Erro desconhecido!')
         }
     }
 

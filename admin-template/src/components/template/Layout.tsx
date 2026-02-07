@@ -4,7 +4,7 @@ import useAppData from "../../data/hook/useAppData"
 import Content from "./Content"
 import SidebarMenu from "./SidebarMenu"
 import TopBar from "./TopBar"
-import forceAuthentication from "@/src/app/functions/ForceAuthentication"
+import forceAuthentication from "@/src/app/functions/forceAuthentication"
 // import ForceAuthentication from "@/src/app/functions/ForceAuthentication"
 
 interface LayoutProps {
