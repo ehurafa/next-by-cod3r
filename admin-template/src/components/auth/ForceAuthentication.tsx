@@ -1,3 +1,4 @@
+import Head from "next/head"
 import Image from "next/image"
 import loadingImage from '../../../public/images/loading.gif'
 import useAuth from "@/src/data/hook/useAuth"
@@ -13,6 +14,16 @@ export default function ForceAuthentication(props) {
     function contentRender() {
         return (
             <>
+                <Head>
+                    <script dangerouslySetInnerHTML={{
+                        __html: `
+                            if(!document.cookie?.include('adimin-template-auth')) {
+                                window.location.href = '/autenticacao'}  
+                        `
+                    }}>
+
+                    </script>
+                </Head>
                 {props.children}
             </>
         )
