@@ -1,10 +1,11 @@
 "use client"
 
 import useAppData from "../../data/hook/useAppData"
-import ForceAuthentication from "../auth/ForceAuthentication"
 import Content from "./Content"
 import SidebarMenu from "./SidebarMenu"
 import TopBar from "./TopBar"
+import forceAuthentication from "@/src/app/functions/ForceAuthentication"
+// import ForceAuthentication from "@/src/app/functions/ForceAuthentication"
 
 interface LayoutProps {
     title: string
@@ -13,25 +14,23 @@ interface LayoutProps {
 }
 
 export default function Layout(props: LayoutProps) {
-    const { theme } = useAppData()
+    const { theme } = useAppData()    
 
-    return (
-        <ForceAuthentication>
-            <div className={`${theme} flex h-screen w-screen`}>
-                <SidebarMenu />
-                <div className={`
-                    flex
-                    flex-col
-                    p-7
-                    w-full
-                    bg-gray-300 dark:bg-gray-800
-                    `}>
-                    <TopBar title={props.title} subtitle={props.subtitle} />
-                    <Content>
-                        {props.children}
-                    </Content>
-                </div>
+    return forceAuthentication(
+        <div className={`${theme} flex h-screen w-screen`}>
+            <SidebarMenu />
+            <div className={`
+                flex
+                flex-col
+                p-7
+                w-full
+                bg-gray-300 dark:bg-gray-800
+                `}>
+                <TopBar title={props.title} subtitle={props.subtitle} />
+                <Content>
+                    {props.children}
+                </Content>
             </div>
-        </ForceAuthentication>
+        </div>
     )
 }
