@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, ReactNode, useState } from "react"
+import { createContext, ReactNode, useEffect, useState } from "react"
 
 type Theme = 'light' | 'dark'
 
@@ -23,8 +23,17 @@ export function AppProvider({ children }: AppProviderProps) {
     const [theme, setTheme] = useState<Theme>('light')
 
     function switchTheme() {
-        setTheme(theme === 'light' ? 'dark' : 'light')
+        const newTheme = theme === 'light' ? 'dark' : 'light'
+        setTheme(newTheme)
+        localStorage.setItem('theme', newTheme)
     }
+
+    useEffect(() => {
+        const savedTheme: Theme = localStorage.getItem( 'theme') as Theme
+        if(savedTheme) {
+            setTheme(savedTheme)
+        }
+    })
 
     return (
         <AppContext.Provider value={{
